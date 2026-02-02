@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacha Sunset - Control de Caja</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+    <div class="controles">
+        <button class="btn-pdf" onclick="descargarPDF()">Generar PDF</button>
+        <button class="btn-borrar" onclick="borrarTodo()">Limpiar</button>
+    </div>
+
+    <div id="documento">
+        <div style="text-align: center; margin-bottom: 8px;">
+            <h1 style="margin: 0; letter-spacing: 3px; font-size: 22px;">PACHA SUNSET</h1>
+            <p style="margin: 0; font-size: 11px; font-weight: bold;">CONTROL DE CAJA Y SUMINISTROS</p>
+        </div>
+
+        <div class="header-info">
+            <div class="campo">CAJERO: <input type="text" id="cajero" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">BARRA: <input type="text" id="barra" class="input-header" oninput="guardarDatos()"></div>
+            <div class="campo">FECHA: <input type="text" id="fecha" class="input-header" oninput="guardarDatos()"></div>
+        </div>
+
+
+        <div class="tablas-flex">
+            <div class="col-izq">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:130px">PRODUCTO</th>
+                            <th style="width:140px">ENTREGAS</th>
+                            <th style="width:40px">DEV.</th>
+                            <th style="width:30px">UTI.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-body"></tbody>
+                    <tbody id="filas-vacias"></tbody>
+                </table>
+                <div class="espacio-medio"></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>VENTAS DIRECTAS</th>
+                            <th>PRECIO</th>
+                            <th style="width: 70px;">CANT.</th>
+                            <th style="width: 80px;">TOTAL</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="ventas-directas-body"></tbody>
+                </table>
+            </div>
+
+            <table class="res-table">
+                <thead>
+                    <tr>
+                        <th style="width:170px">DETALLE VENTAS (COMBOS Y OTROS)</th>
+                        <th>CANT.</th>
+                        <th>PRECIO</th>
+                        <th>SUBTOTAL</th>
+                    </tr>
+                </thead>
+                <tbody id="resumen-body">
+                    </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">DESCUENTO Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="descuento" class="input-caja" oninput="calcular(); guardarDatos()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">TOTAL PLATA REAL Bs:</td>
+                        <td colspan="2" class="celda-input">
+                            <input type="number" id="plata-real" class="input-caja" onchange="mostrarEstadoCaja(); guardarDatos();">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta total-grande">TOTAL Producto Bs:</td>
+                        <td colspan="2" id="gran-total" class="total-celda"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total-etiqueta">ESTADO:</td>
+                        <td colspan="2" id="estado-caja" class="estado-celda"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div id="notificacion" style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50; /* verde por defecto */
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: none;
+        z-index: 9999;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    "></div>
+
+
+      <script src="script.js"></script>
+
+</body>
+</html>

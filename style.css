@@ -1,0 +1,322 @@
+
+        body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; }
+        .controles { padding: 10px; text-align: center; background: #222; position: sticky; top: 0; z-index: 100; display: flex; justify-content: center; gap: 10px; }
+        .btn-pdf { padding: 10px 20px; background-color: #d32f2f; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .btn-borrar { padding: 10px 20px; background-color: #616161; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+
+        /* Busca #documento y cámbialo por este: */
+        #documento { 
+            width: 210mm; 
+            background: white; 
+            margin: 0 auto; 
+            /* Aumentamos el padding lateral para "empujar" el contenido hacia adentro */
+            padding: 10mm 8mm; 
+            box-sizing: border-box;
+            min-height: 270mm; 
+            display: block; 
+        }
+
+        /* Busca .tablas-flex y cámbialo por este: */
+        .tablas-flex { 
+            display: flex; 
+            gap: 10px; /* Reducimos el hueco entre tablas para que quepan mejor */
+            align-items: flex-start; 
+            justify-content: space-between; 
+            width: 100%; 
+        }
+
+        .col-izq {
+            display: flex;
+            flex-direction: column;
+            width: 330px;
+
+            /* 👇 MOVER MÁS A LA IZQUIERDA */
+            margin-left: -4mm;
+        }
+
+        /* Busca .res-table y cámbialo por este: */
+        .res-table { 
+            min-width: 360px; /* Reducimos el ancho mínimo para que no se desborde */
+            flex-grow: 1;
+        }
+
+        .header-info {
+            display: flex;
+            justify-content: space-between; /* alineación horizontal */
+            align-items: center;           /* centra verticalmente los inputs */
+            margin-bottom: 15px;
+            gap: 10px;                     /* separación entre campos */
+        }
+
+        .campo {
+            font-size: 16px;       /* tamaño más compacto */
+            font-weight: bold;     /* grueso */
+            display: flex;
+            align-items: center;
+            gap: 5px;              /* espacio entre etiqueta y input */
+        }
+
+        .input-header {
+            font-size: 16px;       /* mismo tamaño que la etiqueta */
+            font-weight: bold;
+            border: none;          
+            border-bottom: 1.5px solid #000; /* línea inferior visible para escribir */
+            padding: 2px 5px;
+            width: 120px;          /* ancho uniforme y compacto */
+            outline: none;
+            text-align: left;
+        }
+
+
+
+
+        table { border-collapse: collapse; border: 1.2px solid #000; width: 100%; table-layout: fixed; }
+        th { background-color: #eee; font-weight: bold; font-size: 10px; height: 20px; border: 1px solid #000; }
+        td { border: 1px solid #000; padding: 0; text-align: center; font-size: 10px; height: 17px; box-sizing: border-box; }
+
+        .prod-col { text-align: left; padding-left: 5px; width: 130px; overflow: hidden; white-space: nowrap; }
+        .multi-cont { display: flex; width: 100%; height: 100%; }
+        .input-entrega { width: 20%; height: 100%; border: none; border-right: 1px solid #000; text-align: center; font-size: 10px; padding: 0; }
+        .input-entrega:last-child { border-right: none; }
+        .input-dev, .input-venta { width: 100%; height: 100%; border: none; text-align: center; font-size: 11px; font-weight: bold; background: transparent; }
+
+        /* SOLUCIÓN: CONECTAR CELDA TOTAL CON LA DE ARRIBA */
+        .total-fila td { 
+            border: none; /* Quitamos bordes por defecto */
+        }
+
+        .total-etiqueta {
+            text-align: right;
+            padding-right: 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+/* =========================
+   RESPONSIVE PARA CELULARES
+   ========================= */
+@media (max-width: 768px) {
+
+    body {
+        background: #eaeaea;
+    }
+
+    /* Botones */
+    .controles {
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 8px;
+    }
+
+    .btn-pdf, .btn-borrar {
+        flex: 1;
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    /* Documento deja de ser A4 fijo */
+    #documento {
+        width: 100%;
+        min-height: auto;
+        padding: 8px;
+    }
+
+    /* Header */
+    h1 {
+        font-size: 18px !important;
+        letter-spacing: 2px !important;
+    }
+
+    .header-info {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .campo {
+        font-size: 12px;
+    }
+
+    /* Tablas en columna */
+    .tablas-flex {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .col-izq {
+        width: 100%;
+    }
+
+    /* Scroll horizontal para tablas grandes */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    th, td {
+        font-size: 10px;
+    }
+
+    /* Inputs más cómodos */
+    input {
+        font-size: 12px;
+    }
+
+    .input-entrega {
+        width: 22%;
+        font-size: 11px;
+    }
+
+    /* Tabla de resumen */
+    .res-table {
+        min-width: 100%;
+    }
+
+    .total-etiqueta {
+        font-size: 14px;
+    }
+
+    .total-celda {
+        font-size: 18px;
+        height: 40px;
+    }
+}
+
+/* =========================
+   EXTRA: celulares chicos
+   ========================= */
+@media (max-width: 480px) {
+
+    h1 {
+        font-size: 16px !important;
+    }
+
+    th, td {
+        font-size: 9px;
+    }
+
+    .total-celda {
+        font-size: 16px;
+    }
+}
+        .total-celda { 
+            border-left: 1.2px solid #000 !important;
+            border-right: 1.2px solid #000 !important;
+            border-bottom: 1.2px solid #000 !important;
+            border-top: 1.2px solid #000 !important;
+            font-size: 16px; 
+            background-color: #fffde7; 
+            height: 35px; 
+            font-weight: bold;
+            text-align: center;
+            /* SOLUCIÓN */
+            white-space: normal;       /* permite que el texto se rompa */
+            word-wrap: break-word;     /* corta palabra si es necesario */
+            overflow: hidden;          /* evita scroll dentro de la celda */
+            padding: 2px 4px;          /* ajusta un poco el padding */
+        }
+
+
+
+        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
+        @media print {
+            .controles {
+                display: none !important;
+            }
+
+            body {
+                margin: 0 !important;
+                padding: 0 !important;
+                background: white !important;
+            }
+
+            #documento {
+                width: 210mm !important;
+                margin: 0 auto !important;     /* ✅ CENTRADO REAL */
+                padding: 5mm 10mm !important; /* ✅ MISMO padding */
+                min-height: auto !important;
+                box-sizing: border-box !important;
+            }
+        }
+
+
+        /* ===== MEJORA VISUAL CAJA ===== */
+
+        .fila-simple td {
+            height: 84px;
+        }
+
+        .celda-input {
+            border: 1.2px solid #000; /* todos los bordes visibles */
+            padding: 0;
+            height: 35px;
+            box-sizing: border-box;   /* evita que el input sobresalga */
+            background: #fffde7;
+        }
+        #descuento,
+        #plata-real {
+            text-align: left;       /* mueve el texto a la izquierda */
+            padding-left: 5px;      /* separa un poco del borde */
+            font-size: 16px;        /* opcional, ajustar tamaño visual */
+            font-weight: bold;
+        }
+        #gran-total {
+            text-align: left;       /* igual que los inputs */
+            padding-left: 5px;      /* separación consistente */
+        }
+
+        .input-caja {
+            width: 100%;
+            height: 100%;
+            border: none;
+            text-align: left;  /* movido a la izquierda */
+            padding-left: 5px; /* opcional, para que no toque el borde */
+            font-size: 18px;
+            font-weight: bold;
+            background: transparent;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+
+        .total-grande {
+            font-size: 15px;
+        }
+
+      /* Aumentar altura de la celda de estado */
+      .fila-estado td {
+          height: 60px;  /* antes 32px, ahora más alto */
+          min-height: 60px; /* asegura que incluso si está vacía mantenga altura */
+      }
+
+      .estado-celda {
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          background: #f5f5f5;
+          white-space: normal;
+          word-wrap: break-word;
+          overflow: hidden;
+          padding: 8px;  /* un poco más de padding para que se vea más "grande" */
+          box-sizing: border-box; /* asegura que padding no afecte el tamaño total */
+      }
+
+        /* SEPARACIÓN REAL ENTRE TABLAS (PDF FRIENDLY) */
+        .tablas-flex > table,
+        .tablas-flex > .col-izq {
+            margin-right: 5mm;
+        }
+
+        .tablas-flex > table:last-child {
+            margin-right: 0;
+        }
+
+        .espacio-medio {
+            height: 6mm;   /* separación entre tablas */
+        }
+@media (max-width: 768px) {
+    /* Mueve la tabla de productos un poco a la derecha */
+    .col-izq {
+        margin-left: 4mm; /* ajusta el valor según lo necesites */
+    }
+}
